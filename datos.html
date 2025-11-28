@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos del Pedido</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenedor {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #a077ff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #5b2cff;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            border: 2px solid #c7a9ff;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        /* ✨ Azul fosforescente al poner el cursor o escribir */
+        input:hover, input:focus,
+        textarea:hover, textarea:focus {
+            border: 2px solid #00c8ff;
+            box-shadow: 0 0 10px #00e1ff;
+            outline: none;
+        }
+
+        .boton {
+            width: 100%;
+            background: #8452ff;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background: #3c1ba0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Datos del Pedido</h2>
+
+        <form action="exito.html" method="GET">
+
+            <label>Nombre Completo:</label>
+            <input type="text" name="nombre" required>
+
+            <label>Dirección Completa:</label>
+            <textarea name="direccion" required></textarea>
+
+            <label>Número Telefónico:</label>
+            <input type="text" name="telefono" required>
+
+            <label>Total a Pagar:</label>
+            <input type="text" id="total" name="total" readonly>
+
+            <button class="boton" type="submit">Confirmar</button>
+        </form>
+    </div>
+
+    <script>
+        // Obtener el total desde la URL del menú
+        const params = new URLSearchParams(window.location.search);
+        const total = params.get("total");
+
+        // Insertar el total en el input
+        if (total) {
+            document.getElementById("total").value = "$" + total;
+        }
+    </script>
+
+</body>
+</html>
+

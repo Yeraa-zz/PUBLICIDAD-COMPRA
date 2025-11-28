@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda - Inicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000000;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        header { 
+            text-align: center; 
+            padding: 20px; 
+        }
+
+        header img { 
+            width: 150px; 
+        }
+
+        .producto {
+            background: rgb(255, 255, 255);
+            color: black;
+            display: flex;
+            border-radius: 10px;
+
+            /* 🌟 BORDE Y BRILLO NEÓN MORADO */
+            border: 3px solid #b600ff;
+            box-shadow: 0 0 12px #b600ff;
+
+            margin: 25px;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .producto img { 
+            width: 150px; 
+            height: 150px; 
+            object-fit: cover; 
+        }
+
+        .info { 
+            margin-left: 20px; 
+        }
+
+        #totalBox { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            padding: 15px; 
+            border: 3px solid #b600ff;
+            border-radius: 10px;
+            background: rgb(163, 98, 172);
+            box-shadow: 0 0 12px #b600ff;
+        }
+
+        #totalBox button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            border: none;
+            background: #ff00ff;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #totalBox button:hover {
+            background: #ad00ad;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo">
+</header>
+
+<div id="totalBox">
+    Total: $<span id="total">0</span>
+    <br>
+    <button onclick="comprar()">Comprar</button>
+</div>
+
+<div id="productos"></div>
+
+<script>
+let productos = [
+    {
+        img:"1.jpg",
+        nombre:"Jersey Mapache Punk Edición Colaboración",
+        marca:"[Marca Original] x Retrosoul",
+        talla:"M",
+        descripcion:"Una pieza de coleccionista que reinterpreta el icónico kit retro...",
+        costo:"1500"
+    },
+    {
+        img:"2.jpg",
+        nombre:"Jersey Snoopy Hooligan",
+        marca:"JFA x Retrosoul",
+        talla:"L (Ajuste Oversize)",
+        descripcion:"Colaboración JFA x Retrosoul con Snoopy estilo hooligan...",
+        costo:"899"
+    },
+    {
+        img:"3.jpg",
+        nombre:"Jersey Gato DJ White Edition",
+        marca:"Adidas x Retrosoul",
+        talla:"M",
+        descripcion:"Diseño blanco con gráfico de un gato DJ en el centro...",
+        costo:"600"
+    },
+    {
+        img:"4.png",
+        nombre:"PINKANDBLUEFIRE",
+        marca:"RETRO SOUL",
+        talla:"21 A 32 MX",
+        descripcion:"Tenis azul cielo con llamas rosas inspiradas en Canva.",
+        costo:"2500"
+    },
+    {
+        img:"5.png",
+        nombre:"PURPLEHAZE",
+        marca:"RETRO SOUL",
+        talla:"21 A 32 MX",
+        descripcion:"Tenis estilo Chuck Taylor negros con detalles morados.",
+        costo:"1800"
+    },
+    {
+        img:"6.png",
+        nombre:"BLUEROSECHUNKY",
+        marca:"RETRO SOUL",
+        talla:"21 A 32 MX",
+        descripcion:"Tenis Y2K blancos con azul inspirados en Blue Lock.",
+        costo:"2200"
+    },
+    {
+        img:"7.png",
+        nombre:"DRAGONFAX",
+        marca:"RETRO SOUL",
+        talla:"23 A 28 MX",
+        descripcion:"Tenis con dragón y presencia agresiva.",
+        costo:"1345"
+    },
+    {
+        img:"8.png",
+        nombre:"WONSICS",
+        marca:"RETRO SOUL COLAB-ASICS",
+        talla:"24 A 27 MX",
+        descripcion:"Tenis ideales para voleibol, muy cómodos y llamativos.",
+        costo:"1500"
+    }
+];
+
+let total = 0;
+
+let cont = document.getElementById("productos");
+productos.forEach(p => {
+    cont.innerHTML += `
+    <div class='producto'>
+        <img src='${p.img}'>
+        <div class='info'>
+            <h3>${p.nombre}</h3>
+            <p><b>Marca:</b> ${p.marca}</p>
+            <p><b>Talla:</b> ${p.talla}</p>
+            <p>${p.descripcion}</p>
+            <p><b>$${p.costo}</b></p>
+            <button onclick='agregar(${p.costo})'>Agregar</button>
+        </div>
+    </div>`;
+});
+
+function agregar(costo){
+    total += Number(costo);
+    document.getElementById("total").innerText = total;
+    localStorage.setItem("total", total);
+}
+
+function comprar(){
+    // ENVIAR EL TOTAL A datos.html
+    window.location.href = "datos.html?total=" + total;
+}
+</script>
+
+</body>
+</html>
